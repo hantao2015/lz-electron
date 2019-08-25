@@ -10,19 +10,21 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
-import MenuBuilder from './menu';
-import path from 'path' 
-import edge from "electron-edge-js"
-export default class AppUpdater {
-  constructor() {
-    log.transports.file.level = 'info';
-    autoUpdater.logger = log;
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-}
+ 
+const log =require('electron-log');
+//const MenuBuilder =require('./menu');
+const path =require('path') 
+const { autoUpdater } = require("electron-updater")
+ 
+const edge = require("electron-edge-js");
+const electron = require('electron')
+ 
+ 
+ 
+// Module to control application life.
+const app = electron.app
+// Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow
 let HelloElectron = edge.func({
   assemblyFile: `./resources/Electron.dll`,
   typeName: 'Electron.Electron',
@@ -52,6 +54,7 @@ const installExtensions = async () => {
     extensions.map(name => installer.default(installer[name], forceDownload))
   ).catch(console.log);
 };
+
 
 /**
  * Add event listeners...
@@ -86,15 +89,16 @@ app.on('ready', async () => {
 
   });
   
-  
+ // mainWindow.webContents.openDevTools();
+  console.log(app.getVersion());
   HelloElectron(3, function (error, result) {
 
     if (error) throw error
-    mainWindow.loadURL(result);
+    //mainWindow.loadURL(result);
     console.log(result)
   })
  
-  //mainWindow.loadURL(`http://10.108.2.66`);
+  mainWindow.loadURL(`http://kingofdinner.realsun.me:1203`);
   
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -108,6 +112,8 @@ app.on('ready', async () => {
     } else {
       mainWindow.show();
       mainWindow.focus();
+       
+     
     }
   });
 
@@ -120,5 +126,8 @@ app.on('ready', async () => {
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
-  new AppUpdater();
+ // new AppUpdater();
+ log.transports.file.level = 'info';
+ autoUpdater.logger = log;
+ autoUpdater.checkForUpdatesAndNotify();
 });
