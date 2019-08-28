@@ -1,7 +1,7 @@
 {
   "name": "lz-electron",
   "productName": "powerworks",
-  "version": "5.0.20",
+  "version": "5.0.24",
   "description": "Electron application boilerplate based on React for lizhang",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -61,7 +61,10 @@
   "build": {
     "productName": "PowerWorks",
     "appId": "PowerWorks.Realsun.Me",
-     
+    "protocols": {
+      "name": "electron-deep-linking",
+      "schemes": ["hrapp"]
+    },
     "extraResources": [
      
       {
@@ -109,7 +112,7 @@
     },
     "publish": {
       "provider": "generic",
-      "url":"http://ngrok6.realsun.me/",
+      "url":"http://wux-hr03.china.ads.finisar.com/lz-electron/",
       "channel":"latest"
     }
   },
@@ -128,7 +131,8 @@
     "sass",
     "webpack",
     "hot",
-    "reload"
+    "reload",
+    "deep linking"
   ],
   
   "jest": {
