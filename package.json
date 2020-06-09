@@ -1,8 +1,8 @@
 {
   "name": "lz-electron",
-  "productName": "powerworks",
-  "version": "5.0.24",
-  "description": "Electron application boilerplate based on React for lizhang",
+  "productName": "CHASE-IBD",
+  "version": "5.0.2",
+  "description": "IBD powered by Realsun",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -25,7 +25,6 @@
     "postinstall": "yarn flow-typed && electron-builder install-app-deps package.json && yarn build-dll && opencollective-postinstall",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}'",
     "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
-  
     "prestart": "yarn build",
     "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
     "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js",
@@ -59,8 +58,8 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "PowerWorks",
-    "appId": "PowerWorks.Realsun.Me",
+    "productName": "CHASE-IBD",
+    "appId": "PowerWorks.IBD.Realsun.Me",
     "protocols": {
       "name": "electron-deep-linking",
       "schemes": ["hrapp"]
@@ -112,7 +111,7 @@
     },
     "publish": {
       "provider": "generic",
-      "url":"http://wux-hr03.china.ads.finisar.com/lz-electron/",
+      "url":"http://apps.realsun.me/updateApp/chaseIBD/",
       "channel":"latest"
     }
   },

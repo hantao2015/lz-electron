@@ -25,11 +25,11 @@ const electron = require('electron')
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
-// let HelloElectron = edge.func({
-//   assemblyFile: `./resources/Electron.dll`,
-//   typeName: 'Electron.Electron',
-//   methodName: 'HelloElectron'
-// })
+let HelloElectron = edge.func({
+   assemblyFile: `./resources/Electron.dll`,
+   typeName: 'Electron.Electron',
+   methodName: 'HelloElectron'
+ })
 
 let mainWindow = null;
 let deeplinkingUrl="";
@@ -104,23 +104,23 @@ app.on('ready', async () => {
   //mainWindow.webContents.openDevTools();
   
   //console.log(app.getVersion());
-  // HelloElectron(3, function (error, result) {
+    HelloElectron(3, function (error, result) {
 
-  //   if (error) throw error
-  //   //mainWindow.loadURL(result);
-  //   console.log(result)
-  // })
+     if (error) throw error
+      mainWindow.loadURL(result);
+      console.log(result)
+  })
   //deeplinkingUrl="hrapp://openop/http://ddss";
 
   if (deeplinkingUrl && deeplinkingUrl.indexOf(":")>0)
   {
     deeplinkingUrl=deeplinkingUrl.split(":").slice(1);
   }
-  let baseUrl="http://kingofdinner.realsun.me:1203/"
-  baseUrl="http://wux-hr03.china.ads.finisar.com:1002/"
-  let url=baseUrl+deeplinkingUrl
+  //let baseUrl="http://kingofdinner.realsun.me:1203/"
+  //baseUrl="http://wux-hr03.china.ads.finisar.com:1002/"
+  //let url=baseUrl+deeplinkingUrl
   //mainWindow.loadURL(`http://wux-hr03.china.ads.finisar.com:1002`);
-  mainWindow.loadURL(url);
+  //mainWindow.loadURL(url);
   //logEverywhere(url)
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
