@@ -1,7 +1,7 @@
 {
   "name": "lz-electron",
   "productName": "CHASE-IBD",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "description": "IBD powered by Realsun",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",

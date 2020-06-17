@@ -108,7 +108,7 @@ app.on('ready', async () => {
 
      if (error) throw error
       mainWindow.loadURL(result);
-      console.log(result)
+     // console.log(result)
   })
   //deeplinkingUrl="hrapp://openop/http://ddss";
 
@@ -116,6 +116,18 @@ app.on('ready', async () => {
   {
     deeplinkingUrl=deeplinkingUrl.split(":").slice(1);
   }
+  setInterval(() => {
+  try {
+    HelloElectron(3, function (error, result) {
+      if (error) mainWindow&&mainWindow.destroy();
+   });
+    
+  } catch (error) {
+    mainWindow&&mainWindow.destroy();
+  }
+     
+
+  },60000)
   //let baseUrl="http://kingofdinner.realsun.me:1203/"
   //baseUrl="http://wux-hr03.china.ads.finisar.com:1002/"
   //let url=baseUrl+deeplinkingUrl
