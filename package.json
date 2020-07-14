@@ -1,7 +1,7 @@
 {
-  "name": "lz-electron",
+  "name": "chase-ibd-child",
   "productName": "powerworks",
-  "version": "5.0.20",
+  "version": "2.0.0",
   "description": "Electron application boilerplate based on React for lizhang",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",

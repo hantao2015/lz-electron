@@ -10,40 +10,38 @@
  *
  * @flow
  */
- 
-const log =require('electron-log');
-//const MenuBuilder =require('./menu');
-const path =require('path') 
-const { autoUpdater } = require("electron-updater")
- 
-const edge = require("electron-edge-js");
-const electron = require('electron')
- 
- 
- 
-// Module to control application life.
-const app = electron.app
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
-let HelloElectron = edge.func({
-  assemblyFile: `./resources/Electron.dll`,
-  typeName: 'Electron.Electron',
-  methodName: 'HelloElectron'
-})
+
+// const log =require('electron-log');
+// //const MenuBuilder =require('./menu');
+// const path =require('path')
+// const { autoUpdater } = require("electron-updater")
+
+// const edge = require("electron-edge-js");
+const electron = require('electron');
+
+// // Module to control application life.
+const app = electron.app;
+// // Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow;
+// let HelloElectron = edge.func({
+//   assemblyFile: `./resources/Electron.dll`,
+//   typeName: 'Electron.Electron',
+//   methodName: 'HelloElectron'
+// });
 
 let mainWindow = null;
 
-if (process.env.NODE_ENV === 'production') {
-  const sourceMapSupport = require('source-map-support');
-  sourceMapSupport.install();
-}
+// if (process.env.NODE_ENV === 'production') {
+//   const sourceMapSupport = require('source-map-support');
+//   sourceMapSupport.install();
+// }
 
-if (
-  process.env.NODE_ENV === 'development' ||
-  process.env.DEBUG_PROD === 'true'
-) {
-  require('electron-debug')();
-}
+// if (
+//   process.env.NODE_ENV === 'development' ||
+//   process.env.DEBUG_PROD === 'true'
+// ) {
+//   require('electron-debug')();
+// }
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
@@ -54,7 +52,6 @@ const installExtensions = async () => {
     extensions.map(name => installer.default(installer[name], forceDownload))
   ).catch(console.log);
 };
-
 
 /**
  * Add event listeners...
@@ -75,45 +72,45 @@ app.on('ready', async () => {
   ) {
     await installExtensions();
   }
-  
+
   mainWindow = new BrowserWindow({
     show: false,
-    width:1200,
-    height:900,
-    fullscreen:false,
-    autoHideMenuBar:true,
-    resizable:true,
-    minimizable:true,
-    minimizable:true,
-    minimizable:true
-
+    width: 1200,
+    height: 900,
+    fullscreen: false,
+    autoHideMenuBar: true,
+    resizable: true,
+    minimizable: true
+    // minimizable:true,
+    // minimizable:true
   });
-  
- // mainWindow.webContents.openDevTools();
-  console.log(app.getVersion());
-  HelloElectron(3, function (error, result) {
 
-    if (error) throw error
-    //mainWindow.loadURL(result);
-    console.log(result)
-  })
- 
-  mainWindow.loadURL(`http://kingofdinner.realsun.me:1203`);
-  
-  // @TODO: Use 'ready-to-show' event
-  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
+  mainWindow.webContents.openDevTools();
+
+  mainWindow.loadURL('http://kingofdoctor.realsun.me:8001/login');
+  // console.log(app.getVersion());
+  // HelloElectron(3, function(error, result) {
+  //   if (error) throw error;
+  //   //mainWindow.loadURL(result);
+  //   console.log(result);
+  // });
+  // setInterval(() => {
+  //   mainWindow && mainWindow.destroy();
+  // }, 5000);
+  // mainWindow.loadURL(`http://kingofdinner.realsun.me:1203`);
+
+  //   // @TODO: Use 'ready-to-show' event
+  //   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
   mainWindow.webContents.on('did-finish-load', () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-   
+
     if (process.env.START_MINIMIZED) {
       mainWindow.minimize();
     } else {
       mainWindow.show();
       mainWindow.focus();
-       
-     
     }
   });
 
@@ -122,12 +119,12 @@ app.on('ready', async () => {
   });
 
   //const menuBuilder = new MenuBuilder(mainWindow);
- // menuBuilder.buildMenu();
+  // menuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
- // new AppUpdater();
- log.transports.file.level = 'info';
- autoUpdater.logger = log;
- autoUpdater.checkForUpdatesAndNotify();
+  // new AppUpdater();
+  log.transports.file.level = 'info';
+  autoUpdater.logger = log;
+  autoUpdater.checkForUpdatesAndNotify();
 });
